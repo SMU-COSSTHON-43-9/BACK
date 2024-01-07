@@ -24,7 +24,7 @@ public class Volunteer extends BaseTimeEntity {
 
     private String Volunteer;
 
-    private String human;
+    private String writer;
 
     private String phone;
 
