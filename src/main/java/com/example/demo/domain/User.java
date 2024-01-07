@@ -20,12 +20,8 @@ public class User extends BaseTimeEntity {
 
     private String name;
 
-    private String email;
-
     @Embedded
     private Address address;
-
-    private String phone;
 
     @OneToMany(mappedBy = "user")
     private List<Post> posts = new ArrayList<>();

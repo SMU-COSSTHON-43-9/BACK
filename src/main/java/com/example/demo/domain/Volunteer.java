@@ -24,6 +24,10 @@ public class Volunteer extends BaseTimeEntity {
 
     private String Volunteer;
 
+    private String human;
+
+    private String phone;
+
     @Column(name = "is_volunteer")
     private boolean isVolunteer;
 
