@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.domain.address;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

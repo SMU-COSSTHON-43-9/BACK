@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.domain.disease;
 
 import com.example.demo.domain.global.BaseTimeEntity;
 import jakarta.persistence.*;

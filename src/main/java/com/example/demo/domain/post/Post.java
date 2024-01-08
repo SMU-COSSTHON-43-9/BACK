@@ -1,5 +1,6 @@
-package com.example.demo.domain;
+package com.example.demo.domain.post;
 
+import com.example.demo.domain.User;
 import com.example.demo.domain.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,29 +10,23 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Volunteer extends BaseTimeEntity {
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "volunteer_id")
+    @Column(name = "post_id")
     private Long id;
 
-    @Column(name = "prefer_volunteer")
-    private String preferVolunteer;
+    private String title;
 
-    @Column(name = "prefer_address")
-    private String preferAddress;
-
-    private String Volunteer;
+    private String content;
 
     private String writer;
 
-    private String phone;
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
-    @Column(name = "is_volunteer")
-    private boolean isVolunteer;
-
-    private int password;
+    private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
