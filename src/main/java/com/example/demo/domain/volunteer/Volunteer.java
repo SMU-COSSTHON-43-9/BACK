@@ -23,7 +23,7 @@ public class Volunteer extends BaseTimeEntity {
     @Column(name = "prefer_address")
     private String preferAddress;
 
-    private String Volunteer;
+    private String volunteer;
 
     private String writer;
 
@@ -37,4 +37,6 @@ public class Volunteer extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+
 }
