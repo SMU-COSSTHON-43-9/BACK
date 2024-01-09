@@ -4,12 +4,14 @@ import com.example.demo.domain.User;
 import com.example.demo.domain.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@EnableJpaAuditing
 public class Post extends BaseTimeEntity {
 
     @Id
@@ -21,12 +23,9 @@ public class Post extends BaseTimeEntity {
 
     private String content;
 
-    private String writer;
+    private String name;
 
-    @Enumerated(EnumType.STRING)
-    private Type type;
-
-    private String password;
+    private int password;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

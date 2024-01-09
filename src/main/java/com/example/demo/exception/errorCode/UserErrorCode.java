@@ -14,7 +14,8 @@ public enum UserErrorCode implements ErrorCode{
     INACTIVE_VOLUNTEER(HttpStatus.NOT_FOUND, "존재하지 않는 봉사 활동 신청이력서 입니다."),
     INCORRECTING_PASSWORD(HttpStatus.FORBIDDEN, "비밀번호가 다릅니다."),
     MAIL_ERROR(HttpStatus.FORBIDDEN, "메일 전송에 실패하였습니다."),
-    PDF_GENERATE_ERROR(HttpStatus.FORBIDDEN, "pdf 생성에 실패하였습니다.");
+    PDF_GENERATE_ERROR(HttpStatus.FORBIDDEN, "pdf 생성에 실패하였습니다."),
+    INACTIVE_POST(HttpStatus.FORBIDDEN, "존재하지 않는 post입니다.");
 
 
 
