@@ -16,13 +16,16 @@ public class MailSendService {
 
     private final JavaMailSender mailSender;
 
+    @Value("${user.email}")
+    private String toEmail;
+
     @Value("${spring.mail.username}")
     private String fromEmail;
 
     public void exampleMail(String name) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-        mimeMessageHelper.setTo("psw8554@gmail.com");
+        mimeMessageHelper.setTo(toEmail);
         mimeMessageHelper.setFrom(fromEmail);
         mimeMessageHelper.setText(name + "님의 노인 돌봄 신청서 입니다");
         File file = new File("request.pdf");
