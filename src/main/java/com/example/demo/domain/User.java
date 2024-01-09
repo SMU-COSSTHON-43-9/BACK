@@ -1,6 +1,5 @@
 package com.example.demo.domain;
 
-import com.example.demo.domain.address.Address;
 import com.example.demo.domain.global.BaseTimeEntity;
 import com.example.demo.domain.post.Post;
 import com.example.demo.domain.volunteer.Volunteer;
