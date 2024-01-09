@@ -25,12 +25,16 @@ public class CareService {
             List<String> careStrings =CareConverter.toInfoList(careInfoRequestDto);
             pdfService.getPdf(careStrings);
         } catch (IOException e) {
+            e.printStackTrace();
+            File file = new File("request.pdf");
+            file.delete();
             throw new RestApiException(UserErrorCode.PDF_GENERATE_ERROR);
         }
 
         try {
             mailSendService.exampleMail(careInfoRequestDto.getName());
         } catch (Exception e) {
+            e.printStackTrace();
             File file = new File("request.pdf");
             file.delete();
             throw new RestApiException(UserErrorCode.MAIL_ERROR);

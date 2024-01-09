@@ -19,11 +19,11 @@ public class PdfService {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         document.addPage(page);
-        File fontFile = new File("src/main/java/com/example/demo/domain/care/pdf/gulim.ttc");
+        File fontFile = new File("/root/gulim.ttc");
         PDType0Font fontGulim = PDType0Font.load(document, new TrueTypeCollection(fontFile).getFontByName("Gulim"), true);
         PDPageContentStream pcs = new PDPageContentStream(document, document.getPage(0), PDPageContentStream.AppendMode.APPEND, false);
         pcs.beginText();
-        pcs.setFont(fontGulim, 20); // 폰트 크기 설정
+        pcs.setFont(fontGulim,20); // 폰트 크기 설정
         pcs.newLineAtOffset(35f, 780f);
 
         for(String info : infos) {
