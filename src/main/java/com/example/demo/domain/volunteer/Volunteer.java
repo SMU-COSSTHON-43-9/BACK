@@ -30,7 +30,7 @@ public class Volunteer extends BaseTimeEntity {
     private String phone;
 
     @Column(name = "is_volunteer")
-    private boolean isVolunteer;
+    private boolean isCorrectVolunteer;
 
     private int password;
 

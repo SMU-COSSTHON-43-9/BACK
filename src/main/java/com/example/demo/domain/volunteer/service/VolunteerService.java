@@ -18,8 +18,8 @@ public class VolunteerService {
 
     private final VolunteerRepository volunteerRepository;
 
-    public Long createVolunteers(VolunteerRequestDto.VolunteerDto volunteerDto) {
-        Volunteer volunteer = VolunteerConverter.toVolunteer(volunteerDto);
+    public Long createVolunteers(VolunteerRequestDto.VolunteerRDto volunteerRDto) {
+        Volunteer volunteer = VolunteerConverter.toVolunteer(volunteerRDto);
         Volunteer saveVolunteer = volunteerRepository.save(volunteer);
         return saveVolunteer.getId();
     }
