@@ -16,12 +16,9 @@ public class PostResponseDto {
     @Builder
     @AllArgsConstructor
     public static class PostDto{
-
-        @NotNull
+        private Long id;
         private String title;
-        @NotNull
         private String content;
-        @NotNull
         private String name;
     }
 

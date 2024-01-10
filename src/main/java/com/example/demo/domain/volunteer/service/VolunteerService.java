@@ -45,6 +45,6 @@ public class VolunteerService {
             throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
         }
         volunteerRepository.delete(volunteer);
-        return "삭제가 완료되었습니다.";
+        return "봉사 신청 이력서 삭제가 완료되었습니다.";
     }
 }

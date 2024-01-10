@@ -18,6 +18,7 @@ public class Converter {
     }
     public static PostResponseDto.PostDto toPostDto(Post post) {
         return PostResponseDto.PostDto.builder()
+                .id(post.getId())
                 .name(post.getName())
                 .content(post.getContent())
                 .title(post.getTitle())

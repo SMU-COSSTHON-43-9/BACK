@@ -1,5 +1,6 @@
 package com.example.demo.domain.care;
 
+import com.example.demo.domain.global.CompleteMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,6 +30,7 @@ public class CareController {
     @PostMapping("/cares")
     public ResponseEntity<?> carePost(@Valid @RequestBody CareRequestDto.CareInfoRequestDto careInfoRequestDto) {
         careService.carePost(careInfoRequestDto);
-        return ResponseEntity.ok("메일 전송에 성공하였습니다.");
+        CompleteMessage completeMessage = new CompleteMessage("pdf 생성 및 메일 전송에 성공하였습니다.");
+        return ResponseEntity.ok(completeMessage);
     }
 }
