@@ -2,20 +2,18 @@ package com.example.demo.domain.post;
 
 import com.example.demo.domain.post.Dto.PostRequestDto;
 import com.example.demo.domain.post.Dto.PostResponseDto;
-import com.example.demo.domain.volunteer.Volunteer;
-import com.example.demo.domain.volunteer.dto.VolunteerResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Converter {
 
-    public static Post toPost (PostRequestDto.PostDto postDto){
+    public static Post toPost (PostRequestDto.PostRDto postRDto){
         return Post.builder()
-                .title(postDto.getTitle())
-                .content(postDto.getContent())
-                .name(postDto.getName())
-                .password(postDto.getPassword())
+                .title(postRDto.getTitle())
+                .content(postRDto.getContent())
+                .name(postRDto.getName())
+                .password(postRDto.getPassword())
                 .build();
     }
     public static PostResponseDto.PostDto toPostDto(Post post) {

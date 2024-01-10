@@ -38,3 +38,6 @@ out/
 
 ### yml ###
 *.yml
+
+Dockerfile
+이름

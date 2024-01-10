@@ -19,15 +19,17 @@ public class VolunteerResponseDto {
     @Builder
     @AllArgsConstructor
     public static class VolunteerDto {
-        @NotNull
+
         private Long id;
-        @NotNull
+
         private String preferVolunteer;
-        @NotNull
+
         private String preferAddress;
-        @NotNull
+
+        private String volunteer;
+
         private boolean isVolunteer;
-        @NotNull
+
         private String writer;
     }
 
