@@ -1,5 +1,6 @@
 package com.example.demo.domain.post;
 
+import com.example.demo.domain.global.CompleteMessage;
 import com.example.demo.domain.post.Dto.PostRequestDto;
 import com.example.demo.domain.post.Dto.PostResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -64,6 +65,7 @@ public class Controller {
     @DeleteMapping("/posts/{postId}")
     public ResponseEntity<?> deletePost(@PathVariable Long postId, @Valid @RequestBody PostRequestDto.PostDeleteDto postDeleteDto) {
         service.deletePost(postId, postDeleteDto);
-        return ResponseEntity.ok("삭제에 성공하였습니다.");
+        CompleteMessage completeMessage = new CompleteMessage("게시글 삭제에 성공 하였습니다.");
+        return ResponseEntity.ok(completeMessage);
     }
 }

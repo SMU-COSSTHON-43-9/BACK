@@ -1,5 +1,6 @@
 package com.example.demo.domain.volunteer.controller;
 
+import com.example.demo.domain.global.CompleteMessage;
 import com.example.demo.domain.volunteer.dto.VolunteerResponseDto;
 import com.example.demo.domain.volunteer.service.VolunteerService;
 import com.example.demo.domain.volunteer.dto.VolunteerRequestDto;
@@ -66,7 +67,8 @@ public class VolunteerController {
     @DeleteMapping("/volunteers/{volunteerId}")
     public ResponseEntity<?> deleteVolunteer(@PathVariable Long volunteerId, @Valid @RequestBody VolunteerRequestDto.VolunteerDeleteDto volunteerDeleteDto) {
         String deleteComplete = volunteerService.deleteVolunteer(volunteerId,volunteerDeleteDto);
-        return ResponseEntity.ok(deleteComplete);
+        CompleteMessage completeMessage = new CompleteMessage(deleteComplete);
+        return ResponseEntity.ok(completeMessage);
     }
 
 }
