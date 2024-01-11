@@ -29,6 +29,7 @@ public class VolunteerConverter {
                 .volunteer(volunteer.getVolunteer())
                 .preferAddress(volunteer.getPreferAddress())
                 .writer(volunteer.getWriter())
+                .updatedTime(volunteer.getUpdateAt())
                 .build();
     }
 

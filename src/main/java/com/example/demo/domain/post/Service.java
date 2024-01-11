@@ -42,10 +42,28 @@ public class Service {
         Post post = repository.findById(postId).orElseThrow(() -> {
             throw new RestApiException(UserErrorCode.INACTIVE_POST);
         });
-        if (postDeleteDto.getPassword() != post.getPassword()) {
+        if (!postDeleteDto.getPassword().equals(post.getPassword())) {
             throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
         }
         repository.delete(post);
     }
 
+    public Long updatePost(Long postId, PostRequestDto.PostUpdateDto postUpdateDto) {
+        Post post = repository.findById(postId).orElseThrow(() -> {
+            throw new RestApiException(UserErrorCode.INACTIVE_POST);
+        });
+        if (!(postUpdateDto.getPassword().equals(post.getPassword()))) {
+            throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
+        }
+        Post post1 = Post.builder()
+                    .id(post.getId())
+                    .name(post.getName())
+                    .title(postUpdateDto.getTitle())
+                    .content(postUpdateDto.getContent())
+                    .password(post.getPassword())
+                    .build();
+
+        Post post2 = repository.save(post1);
+        return post2.getId();
+    }
 }

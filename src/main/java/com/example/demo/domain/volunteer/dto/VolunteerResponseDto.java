@@ -31,6 +31,8 @@ public class VolunteerResponseDto {
         private boolean isVolunteer;
 
         private String writer;
+
+        private LocalDateTime updatedTime;
     }
 
     @Getter
@@ -42,4 +44,12 @@ public class VolunteerResponseDto {
         private List<VolunteerDto> volunteers;
     }
 
+    @Getter
+    @NoArgsConstructor
+    @Builder
+    @AllArgsConstructor
+    public static class VolunteerUpdateResponseDto{
+        private Long volunteerId;
+        private String message;
+    }
 }

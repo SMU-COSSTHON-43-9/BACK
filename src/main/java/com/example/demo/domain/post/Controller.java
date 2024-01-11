@@ -3,6 +3,7 @@ package com.example.demo.domain.post;
 import com.example.demo.domain.global.CompleteMessage;
 import com.example.demo.domain.post.Dto.PostRequestDto;
 import com.example.demo.domain.post.Dto.PostResponseDto;
+import com.example.demo.domain.volunteer.dto.VolunteerResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @Tag(name = "취미 게시판", description = "취미 게시판 컨트롤러 입니다.")
@@ -67,5 +69,19 @@ public class Controller {
         service.deletePost(postId, postDeleteDto);
         CompleteMessage completeMessage = new CompleteMessage("게시글 삭제에 성공 하였습니다.");
         return ResponseEntity.ok(completeMessage);
+    }
+
+    @Operation(summary = "취미 게시판 수정", description = "취미 게시판 수정")
+    @ApiResponse(responseCode = "200", description = "취미 게시판 수정 성공", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+    })
+    @ApiResponse(responseCode = "403", description = "존재하지 않는 post입니다.")
+    @ApiResponse(responseCode = "403", description = "비밀번호가 다릅니다.")
+    @ApiResponse(responseCode = "500", description = "서버 내 오류")
+    @PatchMapping("/posts/{postId}")
+    public ResponseEntity<?> updatePost(@PathVariable Long postId, @Valid @RequestBody PostRequestDto.PostUpdateDto postUpdateDto) {
+        Long id = service.updatePost(postId, postUpdateDto);
+        PostResponseDto.PostUpdateResponseDto postUpdateResponseDto = new PostResponseDto.PostUpdateResponseDto(id, "게시글 수정에 성공 하였습니다.");
+        return ResponseEntity.ok(postUpdateResponseDto);
     }
 }

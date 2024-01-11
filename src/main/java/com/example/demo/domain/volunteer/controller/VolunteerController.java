@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @Tag(name = "노인 봉사 신청", description = "노인 봉사 신청 컨트롤러 입니다.")
@@ -68,6 +69,20 @@ public class VolunteerController {
     public ResponseEntity<?> deleteVolunteer(@PathVariable Long volunteerId, @Valid @RequestBody VolunteerRequestDto.VolunteerDeleteDto volunteerDeleteDto) {
         String deleteComplete = volunteerService.deleteVolunteer(volunteerId,volunteerDeleteDto);
         CompleteMessage completeMessage = new CompleteMessage(deleteComplete);
+        return ResponseEntity.ok(completeMessage);
+    }
+
+    @Operation(summary = "노인 봉사 신청 수정", description = "노인 봉사 신청 수정")
+    @ApiResponse(responseCode = "200", description = "노인 봉사 신청 수정", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+    })
+    @ApiResponse(responseCode = "403", description = "존재하지 않는 봉사 활동 신청이력서 입니다.")
+    @ApiResponse(responseCode = "403", description = "비밀번호가 다릅니다.")
+    @ApiResponse(responseCode = "500", description = "서버 내 오류")
+    @PatchMapping("/volunteers/{volunteerId}")
+    public ResponseEntity<?> updateVolunteer(@PathVariable Long volunteerId, @Valid @RequestBody VolunteerRequestDto.VolunteerUpdateDto volunteerUpdateDto) {
+        Long id = volunteerService.updateVolunteer(volunteerId, volunteerUpdateDto);
+        VolunteerResponseDto.VolunteerUpdateResponseDto completeMessage = new VolunteerResponseDto.VolunteerUpdateResponseDto(id, "수정이 완료되었습니다.");
         return ResponseEntity.ok(completeMessage);
     }
 
