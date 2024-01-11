@@ -15,7 +15,8 @@ public enum UserErrorCode implements ErrorCode{
     INCORRECTING_PASSWORD(HttpStatus.FORBIDDEN, "비밀번호가 다릅니다."),
     MAIL_ERROR(HttpStatus.FORBIDDEN, "메일 전송에 실패하였습니다."),
     PDF_GENERATE_ERROR(HttpStatus.FORBIDDEN, "pdf 생성에 실패하였습니다."),
-    INACTIVE_POST(HttpStatus.FORBIDDEN, "존재하지 않는 post입니다.");
+    INACTIVE_POST(HttpStatus.FORBIDDEN, "존재하지 않는 post입니다."),
+    IN_PHONE_NUM(HttpStatus.FORBIDDEN, "전화번호 양식이 맞지 않습니다.");
 
 
 
