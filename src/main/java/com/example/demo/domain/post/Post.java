@@ -1,7 +1,7 @@
 package com.example.demo.domain.post;
 
 import com.example.demo.domain.User;
-import com.example.demo.domain.global.BaseTimeEntity;
+import com.example.demo.domain.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EnableJpaAuditing
-public class Post extends BaseTimeEntity {
+public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Post extends BaseTimeEntity {
 
     private String name;
 
-    private int password;
+    private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

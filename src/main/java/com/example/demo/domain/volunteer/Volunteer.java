@@ -1,7 +1,7 @@
 package com.example.demo.domain.volunteer;
 
 import com.example.demo.domain.User;
-import com.example.demo.domain.global.BaseTimeEntity;
+import com.example.demo.domain.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Volunteer extends BaseTimeEntity {
+public class Volunteer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Volunteer extends BaseTimeEntity {
     @Column(name = "is_volunteer")
     private boolean isCorrectVolunteer;
 
-    private int password;
+    private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

@@ -23,6 +23,7 @@ public class Converter {
                 .content(post.getContent())
                 .title(post.getTitle())
                 .name(post.getName())
+                .updatedTime(post.getUpdateAt())
                 .build();
     }
 

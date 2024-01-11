@@ -1,6 +1,6 @@
 package com.example.demo.domain;
 
-import com.example.demo.domain.global.BaseTimeEntity;
+import com.example.demo.domain.global.BaseEntity;
 import com.example.demo.domain.post.Post;
 import com.example.demo.domain.volunteer.Volunteer;
 import jakarta.persistence.*;
@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class User extends BaseTimeEntity {
+public class User extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
