@@ -3,6 +3,7 @@ package com.example.demo.domain.post;
 import com.example.demo.domain.post.Dto.PostRequestDto;
 import com.example.demo.domain.post.Dto.PostResponseDto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Converter {
                 .content(post.getContent())
                 .title(post.getTitle())
                 .name(post.getName())
-                .updatedTime(post.getUpdateAt())
+                .updatedTime(LocalDate.from(post.getUpdateAt()))
                 .build();
     }
 

@@ -3,9 +3,11 @@ package com.example.demo.domain.post.Dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 
 public class PostRequestDto {
     @Getter
+    @Setter
     public static class PostRDto {
         @Schema(description = "제목", example = "배드민턴 모임 입니다!")
         @NotNull
@@ -40,4 +42,12 @@ public class PostRequestDto {
         @NotNull
         private String password;
     }
+
+    @Getter
+    public static class PostVerifyDto{
+        @Schema(description = "비밀번호", example = "1234")
+        @NotNull
+        private String password;
+    }
+
 }

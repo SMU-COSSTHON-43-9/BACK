@@ -32,7 +32,7 @@ public class VolunteerResponseDto {
 
         private String writer;
 
-        private LocalDateTime updatedTime;
+        private LocalDate updatedTime;
     }
 
     @Getter

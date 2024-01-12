@@ -5,6 +5,7 @@ import com.example.demo.domain.post.Dto.PostResponseDto;
 import com.example.demo.exception.errorCode.UserErrorCode;
 import com.example.demo.exception.exception.RestApiException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -15,8 +16,10 @@ import java.util.List;
 public class Service {
 
     private final Repository repository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     public Long createPosts(PostRequestDto.PostRDto postRDto) {
+        postRDto.setPassword(bCryptPasswordEncoder.encode(postRDto.getPassword()));
         Post post = Converter.toPost(postRDto);
         Post savePost = repository.save(post);
         return savePost.getId();
@@ -24,7 +27,7 @@ public class Service {
 
     @Transactional(readOnly = true)
     public PostResponseDto.PostListDto readPosts() {
-        List<Post> posts = repository.findAll();
+        List<Post> posts = repository.findAllByOrderByUpdateAtDesc();
         PostResponseDto.PostListDto postListDto = Converter.toPostListDto(posts);
         return postListDto;
     }
@@ -42,7 +45,8 @@ public class Service {
         Post post = repository.findById(postId).orElseThrow(() -> {
             throw new RestApiException(UserErrorCode.INACTIVE_POST);
         });
-        if (!postDeleteDto.getPassword().equals(post.getPassword())) {
+        //if (!postDeleteDto.getPassword().equals(post.getPassword())) {
+        if(!bCryptPasswordEncoder.matches(postDeleteDto.getPassword(),post.getPassword())){
             throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
         }
         repository.delete(post);
@@ -52,8 +56,10 @@ public class Service {
         Post post = repository.findById(postId).orElseThrow(() -> {
             throw new RestApiException(UserErrorCode.INACTIVE_POST);
         });
-        if (!(postUpdateDto.getPassword().equals(post.getPassword()))) {
-            throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
+//        if (!(postUpdateDto.getPassword().equals(post.getPassword()))) {
+        if(!bCryptPasswordEncoder.matches(postUpdateDto.getPassword(),post.getPassword())){
+
+                throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
         }
         Post post1 = Post.builder()
                     .id(post.getId())
@@ -65,5 +71,15 @@ public class Service {
 
         Post post2 = repository.save(post1);
         return post2.getId();
+    }
+
+    public void verify(Long postId, PostRequestDto.PostVerifyDto verifyDto) {
+        Post post = repository.findById(postId).orElseThrow(() -> {
+            throw new RestApiException(UserErrorCode.INACTIVE_POST);
+        });
+
+        if(!bCryptPasswordEncoder.matches(verifyDto.getPassword(),post.getPassword())){
+            throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
+        }
     }
 }

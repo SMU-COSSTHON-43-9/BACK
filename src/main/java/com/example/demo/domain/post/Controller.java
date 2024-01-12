@@ -84,4 +84,11 @@ public class Controller {
         PostResponseDto.PostUpdateResponseDto postUpdateResponseDto = new PostResponseDto.PostUpdateResponseDto(id, "게시글 수정에 성공 하였습니다.");
         return ResponseEntity.ok(postUpdateResponseDto);
     }
+
+    @PostMapping("/posts/{postId}/verify")
+    public ResponseEntity<?> verifyPost(@PathVariable Long postId, @Valid @RequestBody PostRequestDto.PostVerifyDto verifyDto) {
+        service.verify(postId, verifyDto);
+        CompleteMessage completeMessage = new CompleteMessage("검증에 성공하였습니다.");
+        return ResponseEntity.ok(completeMessage);
+    }
 }

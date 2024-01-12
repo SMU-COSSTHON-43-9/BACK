@@ -4,6 +4,7 @@ import com.example.demo.domain.volunteer.Volunteer;
 import com.example.demo.domain.volunteer.dto.VolunteerRequestDto;
 import com.example.demo.domain.volunteer.dto.VolunteerResponseDto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class VolunteerConverter {
                 .volunteer(volunteer.getVolunteer())
                 .preferAddress(volunteer.getPreferAddress())
                 .writer(volunteer.getWriter())
-                .updatedTime(volunteer.getUpdateAt())
+                .updatedTime(LocalDate.from(volunteer.getUpdateAt()))
                 .build();
     }
 
