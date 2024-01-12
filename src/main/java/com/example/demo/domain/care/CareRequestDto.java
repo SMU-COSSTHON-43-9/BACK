@@ -34,27 +34,26 @@ public class CareRequestDto {
         private boolean offerPersonalInfo;
         @Schema(description = "식별번호 동의 여부", example = "true")
         @NotNull
-        private boolean isIdentificationInfo;
+        private boolean identificationInfo;
         @Schema(description = "민감정보 동의 여부", example = "true")
         @NotNull
-        private boolean isSenseInfo;
+        private boolean senseInfo;
         @Schema(description = "서비스 동의 여부", example = "true")
         @NotNull
-        private boolean isService;
+        private boolean service;
         @Schema(description = "신청자 이름", example = "김영희")
         @NotNull
         private String requestName;
         @Schema(description = "관계", example = "모")
-        @NotNull
         private String relative;
         @Schema(description = "년도", example = "2013")
         @NotNull
-        private int year;
+        private String year;
         @Schema(description = "월", example = "10")
         @NotNull
-        private int month;
+        private String month;
         @Schema(description = "일", example = "30")
         @NotNull
-        private int day;
+        private String day;
     }
 }

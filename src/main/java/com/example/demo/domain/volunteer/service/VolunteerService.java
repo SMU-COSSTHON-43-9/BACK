@@ -9,6 +9,7 @@ import com.example.demo.domain.volunteer.repository.VolunteerRepository;
 import com.example.demo.exception.errorCode.UserErrorCode;
 import com.example.demo.exception.exception.RestApiException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,10 @@ import java.util.List;
 public class VolunteerService {
 
     private final VolunteerRepository volunteerRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     public Long createVolunteers(VolunteerRequestDto.VolunteerRDto volunteerRDto) {
+        volunteerRDto.setPassword(bCryptPasswordEncoder.encode(volunteerRDto.getPassword()));
         Volunteer volunteer = VolunteerConverter.toVolunteer(volunteerRDto);
         Volunteer saveVolunteer = volunteerRepository.save(volunteer);
         return saveVolunteer.getId();
@@ -29,7 +32,7 @@ public class VolunteerService {
 
     @Transactional(readOnly = true)
     public VolunteerResponseDto.VolunteerListDto readVolunteers() {
-        List<Volunteer> volunteers = volunteerRepository.findAll();
+        List<Volunteer> volunteers = volunteerRepository.findAllByOrderByUpdateAtDesc();
         return VolunteerConverter.toVolunteerListDto(volunteers);
     }
 
@@ -46,7 +49,8 @@ public class VolunteerService {
         Volunteer volunteer = volunteerRepository.findById(volunteerId).orElseThrow(()-> {
             throw new RestApiException(UserErrorCode.INACTIVE_VOLUNTEER);
         });
-        if (!(volunteerDeleteDto.getPassword().equals(volunteer.getPassword()))) {
+        //if (!(volunteerDeleteDto.getPassword().equals(volunteer.getPassword()))) {
+        if(!bCryptPasswordEncoder.matches(volunteerDeleteDto.getPassword(), volunteer.getPassword())){
             throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
         }
         volunteerRepository.delete(volunteer);
@@ -57,7 +61,7 @@ public class VolunteerService {
         Volunteer volunteer = volunteerRepository.findById(volunteerId).orElseThrow(()-> {
             throw new RestApiException(UserErrorCode.INACTIVE_VOLUNTEER);
         });
-        if (!(volunteerUpdateDto.getPassword().equals(volunteer.getPassword()))) {
+        if(!bCryptPasswordEncoder.matches(volunteerUpdateDto.getPassword(), volunteer.getPassword())){
             throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
         }
         Volunteer updateVolunteer = Volunteer.builder()
@@ -74,5 +78,14 @@ public class VolunteerService {
         Volunteer volunteer1 = volunteerRepository.save(updateVolunteer);
         Long id = volunteer1.getId();
         return id;
+    }
+
+    public void verifyVolunteer(Long volunteerId, VolunteerRequestDto.VolunteerVerifyDto verifyDto) {
+        Volunteer volunteer = volunteerRepository.findById(volunteerId).orElseThrow(()-> {
+            throw new RestApiException(UserErrorCode.INACTIVE_VOLUNTEER);
+        });
+        if(!bCryptPasswordEncoder.matches(verifyDto.getPassword(), volunteer.getPassword())){
+            throw new RestApiException(UserErrorCode.INCORRECTING_PASSWORD);
+        }
     }
 }

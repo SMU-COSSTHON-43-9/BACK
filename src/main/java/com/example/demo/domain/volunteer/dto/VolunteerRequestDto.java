@@ -3,10 +3,12 @@ package com.example.demo.domain.volunteer.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 
 public class VolunteerRequestDto {
 
     @Getter
+    @Setter
     public static class VolunteerRDto {
         @Schema(description = "비밀 번호", example = "1234")
         @NotNull
@@ -58,5 +60,12 @@ public class VolunteerRequestDto {
         @Schema(description = "연락처", example = "010-1234-1234")
         @NotNull
         private String phone;
+    }
+
+    @Getter
+    public static class VolunteerVerifyDto {
+        @Schema(description = "비밀 번호", example = "1234")
+        @NotNull
+        private String password;
     }
 }

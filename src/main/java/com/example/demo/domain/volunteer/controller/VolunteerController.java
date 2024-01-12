@@ -86,4 +86,11 @@ public class VolunteerController {
         return ResponseEntity.ok(completeMessage);
     }
 
+    @PostMapping("/volunteers/{volunteerId}/verify")
+    public ResponseEntity<?> verifyVolunteer(@PathVariable Long volunteerId, @Valid @RequestBody VolunteerRequestDto.VolunteerVerifyDto verifyDto) {
+        volunteerService.verifyVolunteer(volunteerId, verifyDto);
+        CompleteMessage completeMessage = new CompleteMessage("비밀번호 인증에 성공하였습니다.");
+        return ResponseEntity.ok(completeMessage);
+    }
+
 }
