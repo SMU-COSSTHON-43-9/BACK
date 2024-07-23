@@ -2,6 +2,7 @@
 
 -----
 
-* 기존의 노인돌봄서비스의 신청 절차를 한 층 간소화 함으로써 편리하고 더 빠른 서비스 기대.
-![image](https://github.com/user-attachments/assets/6544a1d5-fbf2-4d93-bc46-903845c2d9ed)
+* ![image](https://github.com/user-attachments/assets/50b7de31-4ab1-48f8-ae97-d8fef66c6c2a)
+
+
 
